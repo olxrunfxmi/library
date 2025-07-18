@@ -97,3 +97,125 @@
 		scroll-margin-block: 5ex;
 	}
 }
+
+@layer base {
+	:root {
+		/* Font Family*/
+		--sans-font: "Inter", sans-serif;
+		--serif-font: "EB Garamond", serif;
+		--heading-font: var(--serif-font);
+
+		/* Font Details */
+		--ls-s: -0.02em;
+		--ls-m: -0.05em;
+		--heading-ls: var(--ls-s);
+		--text-ls: var(--ls-m);
+
+		--heading-lh: 1.4;
+
+		/* Font Sizes */
+		--step--1: 0.875rem; /* 14px */
+		--step-1: 1rem; /* 16px */
+		--step-2: 1.25rem; /* 20px */
+
+		/* Radius */
+		--radius-s: 8px;
+		--radius-m: 24px;
+		--radius-l: 40px;
+		--radius-xl: 48px;
+		--raduis-round: 50%;
+		--radius-button: var(--radius-xl);
+
+		/* Spacing */
+		--spacing-s: 8px;
+		--spacing-m: 12px;
+		--spacing-l: 16px;
+		--spacing-xl: 24px;
+		--spacing-xxl: 32px;
+		--spacing-xxxl: 40px;
+
+		/* White and Black */
+		--library--white--main: rgba(255, 255, 255, 1);
+		--library--black--main: rgba(20, 20, 20, 1);
+
+		/* Greys */
+		--library--grey--main: rgba(200, 200, 200, 1);
+		--library--grey--text: rgba(170, 170, 170, 1);
+		--library--grey--stroke: rgba(236, 236, 236, 1);
+
+		/* Accent and Book Colors */
+		--library--book--orange-fill: rgba(255, 95, 2, 1);
+		--library--book--orange-stroke: rgba(255, 118, 39, 1);
+		--library--book--orange-binder: rgba(170, 46, 1, 1);
+		--library--book--text-on-orange: rgba(78, 21, 0, 1);
+
+		--library--book--blue-fill: rgba(2, 145, 255, 1);
+		--library--book--blue-stroke: rgba(39, 140, 255, 1);
+		--library--book--blue-binder: rgba(1, 97, 170, 1);
+		--library--book--text-on-blue: rgba(0, 36, 78, 1);
+
+		--library--book--purple-fill: rgba(145, 2, 255, 1);
+		--library--book--purple-stroke: rgba(110, 2, 193, 1);
+		--library--book--purple-binder: rgba(116, 0, 205, 1);
+		--library--book--text-on-purple: rgba(239, 226, 255, 1);
+
+		--library--book--pink-fill: rgba(255, 2, 108, 1);
+		--library--book--pink-stroke: rgba(234, 3, 99, 1);
+		--library--book--pink-binder: rgba(209, 0, 88, 1);
+		--library--book--text-on-pink: rgba(43, 0, 18, 1);
+
+		--library--book--red-fill: rgba(255, 36, 2, 1);
+		--library--book--red-stroke: rgba(255, 59, 29, 1);
+		--library--book--red-binder: rgba(205, 31, 3, 1);
+		--library--book--text-on-red: rgba(55, 8, 1, 1);
+
+		--library--book--green-fill: rgba(0, 127, 36, 1);
+		--library--book--green-stroke: rgba(0, 88, 25, 1);
+		--library--book--green-binder: rgba(1, 146, 42, 1);
+		--library--book--text-on-green: var(--library--white--main);
+
+		/* Light Colors */
+		--library--background-fill: rgba(238, 238, 238, 1);
+		--library--text-on-bg: var(--library--black--main);
+		--library--faint-text-on-bg: rgba(79, 79, 79, 1);
+		--library--elevated-fill: rgba(224, 224, 224, 1);
+		--library--text-on-elevated: rgba(130, 130, 130, 1);
+		--library--elevated-stroke: rgba(216, 216, 216, 1);
+		--library--action--background: var(--library--white--main);
+		--library--action--text-on-bg: var(--library--black--main);
+
+		/* Dark Colors */
+		@media (prefers-color-scheme: dark) {
+			--library--background-fill: rgba(4, 4, 4, 1);
+			--library--text-on-bg: var(--library--white--main);
+			--library--faint-text-on-bg: var(--library--grey--main);
+			--library--elevated-fill: rgba(39, 39, 39, 1);
+			--library--text-on-elevated: var(--library--grey--main);
+			--library--elevated-stroke: rgba(58, 55, 55, 1);
+			--library--action--background: var(--library--black--main);
+			--library--action--text-on-bg: var(--library--white--main);
+		}
+	}
+}
+
+@layer structure {
+	body {
+		background: var(--library--background-fill);
+		font-family: var(--sans-font);
+		letter-spacing: var(--text-ls);
+		padding-block-start: var(--spacing-xxl);
+	}
+
+	.container {
+		max-width: 1080px;
+		margin-inline: auto;
+		padding-inline: 12px;
+	}
+}
+
+@layer styling {
+	.logo {
+		display: flex;
+		gap: var(--spacing-s);
+	}
+}
