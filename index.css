@@ -474,4 +474,25 @@
 			--color: var(--library--book--text-on-green);
 		}
 	}
+
+	.empty {
+		display: grid;
+		place-content: center;
+
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		z-index: -1;
+
+		.column {
+			align-items: center;
+			gap: var(--spacing-s);
+		}
+
+		p {
+			color: var(--library--text-on-bg);
+			margin: 0;
+		}
+	}
 }
