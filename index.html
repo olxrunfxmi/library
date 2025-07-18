@@ -14,16 +14,79 @@
 </head>
 
 <body>
-    <main class="container">
-        <div class="article">
+    <main class="container grid-flow">
+        <article class="article column">
             <div class="logo">
                 <img src="./assets/thelibrary.svg" alt="">
                 <span><span class="underline">the</span>Library</span>
             </div>
-            <div class="pill"></div>
-        </div>
-        <h1>Testing Media query - Dark and Light Mode</h1>
+            <div class="column">
+                <div class="pill cased">
+                    <span class="info">7 books</span>.
+                    <span class="info">3 Read</span>
+                </div>
+                <div class="pill">
+                    <span class="info">4580 Pages</span>.
+                </div>
+            </div>
+            <div class="holder">
+                <svg width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0H21V32L11 26.5L0 32V0Z" fill="#E0E0E0" />
+                </svg>
+                <span class="text subtle">Means Read</span>
+            </div>
+        </article>
+        <section class="book">
+            <p class="edition">1st Edition</p>
+            <h2 class="title">The University of Ibadan Press Material for 2024</h2>
+            <p class="page">763 pages</p>
+            <div class="bar">
+                <p class="year">University of Ibadan</p>
+                <p>2025</p>
+            </div>
+            <svg class="icon" width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0H21V32L11 26.5L0 32V0Z" fill="#272727" />
+            </svg>
+        </section>
+        <section class="book" data-color="blue">
+            <p class="edition">1st Edition</p>
+            <h2 class="title">The University of Ibadan Press Material for 2024 - Engineering and Chemistry</h2>
+            <p class="page">763 pages</p>
+            <div class="bar">
+                <p class="year">University of Ibadan</p>
+                <p>2025</p>
+            </div>
+            <svg class="icon" width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0H21V32L11 26.5L0 32V0Z" fill="#272727" />
+            </svg>
+        </section>
+        <section class="book" data-color="green" data-read="false">
+            <p class="edition">2d Edition</p>
+            <h2 class="title">New General Mathematics for Senior Secondary Schools</h2>
+            <p class="page">763 pages</p>
+            <div class="bar">
+                <p class="year">University of Ibadan</p>
+                <p>2025</p>
+            </div>
+            <svg class="icon" width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0H21V32L11 26.5L0 32V0Z" fill="#272727" />
+            </svg>
+        </section>
     </main>
+    <button class="btn" id="main-btn">
+        <svg class="btn-svg" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <mask id="mask0_225_1396" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="21"
+                height="20">
+                <rect x="0.5" width="20" height="20" fill="#D9D9D9" />
+            </mask>
+            <g mask="url(#mask0_225_1396)">
+                <path
+                    d="M6.74992 18.3334C5.94436 18.3334 5.25686 18.0487 4.68742 17.4792C4.11797 16.9098 3.83325 16.2223 3.83325 15.4167V4.58341C3.83325 3.77786 4.11797 3.09036 4.68742 2.52091C5.25686 1.95147 5.94436 1.66675 6.74992 1.66675H17.1666V14.1667C16.8194 14.1667 16.5242 14.2883 16.2812 14.5313C16.0381 14.7744 15.9166 15.0695 15.9166 15.4167C15.9166 15.764 16.0381 16.0591 16.2812 16.3022C16.5242 16.5452 16.8194 16.6667 17.1666 16.6667V18.3334H6.74992ZM7.16659 12.5001H8.83325V3.33341H7.16659V12.5001ZM6.74992 16.6667H14.5208C14.4374 16.4723 14.3714 16.2744 14.3228 16.073C14.2742 15.8716 14.2499 15.6529 14.2499 15.4167C14.2499 15.1945 14.2708 14.9792 14.3124 14.7709C14.3541 14.5626 14.4235 14.3612 14.5208 14.1667H6.74992C6.38881 14.1667 6.0902 14.2883 5.85409 14.5313C5.61797 14.7744 5.49992 15.0695 5.49992 15.4167C5.49992 15.7779 5.61797 16.0765 5.85409 16.3126C6.0902 16.5487 6.38881 16.6667 6.74992 16.6667Z"
+                    fill="white" />
+            </g>
+        </svg>
+        <span class="text">Add Book</span>
+    </button>
 </body>
 
 </html>
