@@ -1,5 +1,3 @@
-const myLibrary = [];
-
 function Book() {
 	if (!new.target) {
 		throw Error("Can generate Book object unless it's an instance");
@@ -29,21 +27,54 @@ Book.prototype = {
 			read: this.read ? this.read : false,
 		};
 	},
+	toJSON() {
+		return {
+			id: this.id,
+			id: this.id,
+			title: this.title,
+			author: this.author,
+			year: this.year,
+			pages: this.pages,
+			edition: this.edition,
+			read: this.read || false,
+		};
+	},
 };
 
-function addBookToLibrary(bookObj, readValue) {
+Book.fromJSON = function (data) {
 	const book = new Book();
-	book.addInfo(bookObj.title, bookObj.author, book.year, book.edition);
+	book.id = data.id;
+	book.title = data.title;
+	book.author = data.author;
+	book.year = data.year;
+	book.pages = data.pages;
+	book.edition = data.edition;
+	book.read = data.read;
+	return book;
+};
+
+function addBookToLibrary(library, book, readValue) {
 	if (readValue) {
 		book.setRead(readValue);
 	}
 
-	myLibrary.push(book);
+	library.push(book);
+	saveLibraryToStorage(library);
 }
 
 function renderLibrary(library, holderEl) {}
 
-function generateBookObj(formData) {}
+function generateBookObj(formData) {
+	const book = new Book();
+	book.addInfo(
+		formData.title,
+		formData.author,
+		formData.year,
+		formData.pages,
+		formData.edition
+	);
+	return book;
+}
 
 function removeBookFromLibrary(library, id) {
 	return library.filter((book) => {
@@ -51,7 +82,26 @@ function removeBookFromLibrary(library, id) {
 	});
 }
 
-// Test
-const book = new Book();
-book.addInfo("The Winepressr", "Jesus Christ", "0BC", 347);
-console.log(book.getDetails());
+function saveLibraryToStorage(library) {
+	const serializedLibrary = library.map((book) => book.toJSON());
+	localStorage.setItem("library", JSON.stringify(serializedLibrary));
+	console.log("Saved");
+}
+
+function loadLibraryFromStorage() {
+	const storedData = localStorage.getItem("library");
+	if (!storedData) return [];
+
+	const parsedData = JSON.parse(storedData);
+	return parsedData.map((bookData) => Book.fromJSON(bookData));
+}
+
+export {
+	Book,
+	addBookToLibrary,
+	renderLibrary,
+	generateBookObj,
+	removeBookFromLibrary,
+	loadLibraryFromStorage,
+	saveLibraryToStorage,
+};

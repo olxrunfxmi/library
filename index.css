@@ -577,10 +577,16 @@
 		.column {
 			align-items: center;
 			gap: var(--spacing-s);
+
+			.empty-svg {
+				g path {
+					fill: var(--library--elevated-fill);
+				}
+			}
 		}
 
 		p {
-			color: var(--library--text-on-bg);
+			color: var(--library--faint-text-on-bg);
 			margin: 0;
 		}
 
