@@ -82,7 +82,7 @@ function generateBookObj(formData) {
 
 function removeBookFromLibrary(library, id) {
 	return library.filter((book) => {
-		book.id !== id;
+		return book.id !== id;
 	});
 }
 

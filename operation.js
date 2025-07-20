@@ -99,10 +99,7 @@ submitButtonEl.addEventListener("click", (e) => {
 		bookPageInfoEl
 	);
 	Library.renderBook(book, generateBookElement, mainEl);
-	notifyClient(
-		notificationHolderEl,
-		createNotification(book.toJSON().title, "add")
-	);
+	notifyClient(notificationHolderEl, createNotification(book.title, "add"));
 });
 
 function processForm(formEl) {
@@ -178,6 +175,21 @@ function generateBookElement(bookData) {
 	const textEl = generateElDetails("span", "text", "Delete");
 	const closeButtonEl = document.createElement("button");
 	closeButtonEl.classList.add("close");
+
+	closeButtonEl.addEventListener("click", (e) => {
+		const bookHolderEl = e.currentTarget.parentElement.parentElement;
+		bookHolderEl.remove();
+		myLibrary = Library.removeBookFromLibrary(myLibrary, bookData.id);
+		Library.saveLibraryToStorage(myLibrary);
+		trackLibraryBreakdown(
+			Library.getLibraryBreakdown(myLibrary),
+			bookNoInfoEl,
+			bookReadInfoEl,
+			bookPageInfoEl
+		);
+		trackLibraryStorage();
+	});
+
 	const deleteSVGEl = createComplexSVG(deleteSVGProp);
 	closeButtonEl.appendChild(deleteSVGEl);
 	deleteEl.append(textEl, closeButtonEl);
