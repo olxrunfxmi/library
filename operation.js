@@ -35,7 +35,6 @@ const deleteSVGProp = {
 		"M7.06381 21.064C6.51381 21.064 6.04298 20.8682 5.65133 20.4765C5.25967 20.0848 5.06385 19.614 5.06386 19.064L5.06414 6.06399L4.06414 6.06396L4.06419 4.06396L9.06419 4.06407L9.06421 3.06407L15.0642 3.06421L15.0642 4.06421L20.0642 4.06432L20.0641 6.06432L19.0641 6.06429L19.0639 19.0643C19.0638 19.6143 18.868 20.0851 18.4763 20.4768C18.0847 20.8684 17.6138 21.0643 17.0638 21.0643L7.06381 21.064ZM9.0639 17.0641L11.0639 17.0641L11.0641 8.06412L9.0641 8.06407L9.0639 17.0641ZM13.0639 17.0642L15.0639 17.0642L15.0641 8.06421L13.0641 8.06416L13.0639 17.0642Z",
 	fill: "#C8C8C8",
 };
-const colorOption = ["orange", "blue", "purple", "pink", "red", "green"];
 
 const formDialogEl = document.querySelector("#formDialog");
 const formEl = formDialogEl.querySelector("#bookForm");
@@ -44,10 +43,16 @@ const closeButtonEl = document.querySelector("#close-btn");
 const submitButtonEl = formEl.querySelector("#submit-btn");
 const emptyEl = document.querySelector(".empty");
 const mainEl = document.querySelector("main.container");
+const libraryInfoEl = document.querySelector("article.article");
+const bookNoInfoEl = libraryInfoEl.querySelector("#book-no");
+const bookReadInfoEl = libraryInfoEl.querySelector("#book-read");
+const bookPageInfoEl = libraryInfoEl.querySelector("#book-pages");
+const notificationHolderEl = document.querySelector(".notify-holder ");
 
 // For reseting
-localStorage.removeItem("library");
+// localStorage.removeItem("library");
 
+// Initial Setup
 if (!localStorage.getItem("library")) {
 	Library.saveLibraryToStorage(myLibrary);
 	emptyEl.dataset.visible = "true";
@@ -55,6 +60,16 @@ if (!localStorage.getItem("library")) {
 	trackLibraryStorage();
 }
 
+trackLibraryBreakdown(
+	Library.getLibraryBreakdown(myLibrary),
+	bookNoInfoEl,
+	bookReadInfoEl,
+	bookPageInfoEl
+);
+
+Library.renderLibrary(myLibrary, generateBookElement, mainEl);
+
+// Event Listeners
 addButtonEl.addEventListener("click", () => {
 	formDialogEl.showModal();
 });
@@ -77,7 +92,17 @@ submitButtonEl.addEventListener("click", (e) => {
 	Library.addBookToLibrary(myLibrary, book, formData.read);
 	trackLibraryStorage();
 	formDialogEl.close();
-	Library.renderLibrary(myLibrary, generateBookElement, mainEl);
+	trackLibraryBreakdown(
+		Library.getLibraryBreakdown(myLibrary),
+		bookNoInfoEl,
+		bookReadInfoEl,
+		bookPageInfoEl
+	);
+	Library.renderBook(book, generateBookElement, mainEl);
+	notifyClient(
+		notificationHolderEl,
+		createNotification(book.toJSON().title, "add")
+	);
 });
 
 function processForm(formEl) {
@@ -106,6 +131,21 @@ function trackLibraryStorage() {
 	} else {
 		emptyEl.dataset.visible = "false";
 	}
+}
+
+function trackLibraryBreakdown(libraryBreakdown, bookNo, bookRead, bookPages) {
+	bookNo.textContent =
+		libraryBreakdown.noBooks === 0
+			? `No books`
+			: `${libraryBreakdown.noBooks} Books`;
+	bookRead.textContent =
+		libraryBreakdown.noReadBooks === 0
+			? `No Read`
+			: `${libraryBreakdown.noReadBooks} Read`;
+	bookPages.textContent =
+		libraryBreakdown.totalPages === 0
+			? `No pages yet`
+			: `${libraryBreakdown.totalPages} Pages`;
 }
 
 function generateBookElement(bookData) {
@@ -144,6 +184,7 @@ function generateBookElement(bookData) {
 
 	sectionEl.append(editionParaEl, titleEl, pageEl, barEl, readSVGEl, deleteEl);
 	sectionEl.dataset.color = bookData.color;
+	sectionEl.dataset.id = bookData.id;
 
 	return sectionEl;
 }
@@ -215,4 +256,24 @@ function createComplexSVG(prop) {
 	svg.appendChild(group);
 
 	return svg;
+}
+
+function createNotification(bookName, operation) {
+	let content;
+	if (operation === "add") {
+		content = `${bookName} has been added.`;
+	} else if (operation === "delete") {
+		content = `${bookName} has been deleted.`;
+	} else if (operation === "read") {
+		content = `${bookName} read status changed.`;
+	}
+	const notificationEl = generateElDetails("div", "notification", content);
+	return notificationEl;
+}
+
+function notifyClient(holderEl, notificationEl) {
+	holderEl.appendChild(notificationEl);
+	setTimeout(() => {
+		notificationEl.remove();
+	}, 3000);
 }

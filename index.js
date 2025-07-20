@@ -58,10 +58,14 @@ function addBookToLibrary(library, book, readValue) {
 
 function renderLibrary(library, generateFunc, holderEl) {
 	library.forEach((book) => {
-		const bookData = book.toJSON();
-		const bookEl = generateFunc(bookData);
-		holderEl.appendChild(bookEl);
+		renderBook(book, generateFunc, holderEl);
 	});
+}
+
+function renderBook(book, generateFunc, holderEl) {
+	const bookData = book.toJSON();
+	const bookEl = generateFunc(bookData);
+	holderEl.appendChild(bookEl);
 }
 
 function generateBookObj(formData) {
@@ -96,12 +100,33 @@ function loadLibraryFromStorage() {
 	return parsedData.map((bookData) => Book.fromJSON(bookData));
 }
 
+function getLibraryBreakdown(library) {
+	const booksBreakdown = {
+		noBooks: 0,
+		noReadBooks: 0,
+		totalPages: 0,
+	};
+
+	library.forEach((book) => {
+		booksBreakdown.noBooks++;
+		const bookJSON = book.toJSON();
+		if (bookJSON.read === true) {
+			booksBreakdown.noReadBooks++;
+		}
+		booksBreakdown.totalPages += Number(bookJSON.pages);
+	});
+
+	return booksBreakdown;
+}
+
 export {
 	Book,
 	addBookToLibrary,
 	renderLibrary,
 	generateBookObj,
+	renderBook,
 	removeBookFromLibrary,
 	loadLibraryFromStorage,
 	saveLibraryToStorage,
+	getLibraryBreakdown,
 };

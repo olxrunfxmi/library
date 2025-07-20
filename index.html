@@ -24,11 +24,11 @@
             </div>
             <div class="column">
                 <div class="pill cased">
-                    <span class="info">7 books</span>.
-                    <span class="info">3 Read</span>
+                    <span class="info" id="book-no">7 books</span>.
+                    <span class="info" id="book-read">3 Read</span>
                 </div>
                 <div class="pill">
-                    <span class="info">4580 Pages</span>.
+                    <span class="info" id="book-pages">4580 Pages</span>.
                 </div>
             </div>
             <div class="holder">
@@ -38,95 +38,6 @@
                 <span class="text subtle">Means Read</span>
             </div>
         </article>
-        <!-- <section class="book">
-            <p class="edition">1st Edition</p>
-
-            <h2 class="title">The University of Ibadan Press Material for 2024</h2>
-
-            <p class="page">763 pages</p>
-
-            <div class="bar">
-                <p class="author">University of Ibadan</p>
-                <p class="year">2025</p>
-            </div>
-
-            <svg class="icon" width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0H21V32L11 26.5L0 32V0Z" fill="#272727" />
-            </svg>
-
-            <div class="delete">
-                <span class="text">Delete</span>
-                <button class="close">
-                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <mask id="mask0_282_1112" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
-                            width="25" height="25">
-                            <rect x="0.064209" y="0.0639648" width="24" height="24" fill="#D9D9D9" />
-                        </mask>
-                        <g mask="url(#mask0_282_1112)">
-                            <path
-                                d="M7.06381 21.064C6.51381 21.064 6.04298 20.8682 5.65133 20.4765C5.25967 20.0848 5.06385 19.614 5.06386 19.064L5.06414 6.06399L4.06414 6.06396L4.06419 4.06396L9.06419 4.06407L9.06421 3.06407L15.0642 3.06421L15.0642 4.06421L20.0642 4.06432L20.0641 6.06432L19.0641 6.06429L19.0639 19.0643C19.0638 19.6143 18.868 20.0851 18.4763 20.4768C18.0847 20.8684 17.6138 21.0643 17.0638 21.0643L7.06381 21.064ZM9.0639 17.0641L11.0639 17.0641L11.0641 8.06412L9.0641 8.06407L9.0639 17.0641ZM13.0639 17.0642L15.0639 17.0642L15.0641 8.06421L13.0641 8.06416L13.0639 17.0642Z"
-                                fill="#C8C8C8" />
-                        </g>
-                    </svg>
-                </button>
-            </div>
-        </section> -->
-        <!-- <section class="book" data-color="blue">
-            <p class="edition">1st Edition</p>
-            <h2 class="title">The University of Ibadan Press Material for 2024 - Engineering and Chemistry</h2>
-            <p class="page">763 pages</p>
-            <div class="bar">
-                <p class="year">University of Ibadan</p>
-                <p>2025</p>
-            </div>
-            <svg class="icon" width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0H21V32L11 26.5L0 32V0Z" fill="#272727" />
-            </svg>
-            <div class="delete">
-                <span class="text">Delete</span>
-                <button class="close">
-                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <mask id="mask0_282_1112" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
-                            width="25" height="25">
-                            <rect x="0.064209" y="0.0639648" width="24" height="24" fill="#D9D9D9" />
-                        </mask>
-                        <g mask="url(#mask0_282_1112)">
-                            <path
-                                d="M7.06381 21.064C6.51381 21.064 6.04298 20.8682 5.65133 20.4765C5.25967 20.0848 5.06385 19.614 5.06386 19.064L5.06414 6.06399L4.06414 6.06396L4.06419 4.06396L9.06419 4.06407L9.06421 3.06407L15.0642 3.06421L15.0642 4.06421L20.0642 4.06432L20.0641 6.06432L19.0641 6.06429L19.0639 19.0643C19.0638 19.6143 18.868 20.0851 18.4763 20.4768C18.0847 20.8684 17.6138 21.0643 17.0638 21.0643L7.06381 21.064ZM9.0639 17.0641L11.0639 17.0641L11.0641 8.06412L9.0641 8.06407L9.0639 17.0641ZM13.0639 17.0642L15.0639 17.0642L15.0641 8.06421L13.0641 8.06416L13.0639 17.0642Z"
-                                fill="#C8C8C8" />
-                        </g>
-                    </svg>
-                </button>
-            </div>
-        </section>
-        <section class="book" data-color="green" data-read="false">
-            <p class="edition">2d Edition</p>
-            <h2 class="title">New General Mathematics for Senior Secondary Schools</h2>
-            <p class="page">763 pages</p>
-            <div class="bar">
-                <p class="year">University of Ibadan</p>
-                <p>2025</p>
-            </div>
-            <svg class="icon" width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0H21V32L11 26.5L0 32V0Z" fill="#272727" />
-            </svg>
-            <div class="delete">
-                <span class="text">Delete</span>
-                <button class="close">
-                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <mask id="mask0_282_1112" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
-                            width="25" height="25">
-                            <rect x="0.064209" y="0.0639648" width="24" height="24" fill="#D9D9D9" />
-                        </mask>
-                        <g mask="url(#mask0_282_1112)">
-                            <path
-                                d="M7.06381 21.064C6.51381 21.064 6.04298 20.8682 5.65133 20.4765C5.25967 20.0848 5.06385 19.614 5.06386 19.064L5.06414 6.06399L4.06414 6.06396L4.06419 4.06396L9.06419 4.06407L9.06421 3.06407L15.0642 3.06421L15.0642 4.06421L20.0642 4.06432L20.0641 6.06432L19.0641 6.06429L19.0639 19.0643C19.0638 19.6143 18.868 20.0851 18.4763 20.4768C18.0847 20.8684 17.6138 21.0643 17.0638 21.0643L7.06381 21.064ZM9.0639 17.0641L11.0639 17.0641L11.0641 8.06412L9.0641 8.06407L9.0639 17.0641ZM13.0639 17.0642L15.0639 17.0642L15.0641 8.06421L13.0641 8.06416L13.0639 17.0642Z"
-                                fill="#C8C8C8" />
-                        </g>
-                    </svg>
-                </button>
-            </div>
-        </section> -->
     </main>
     <section class="empty" data-visible="false">
         <div class="column">
@@ -205,6 +116,8 @@
         </svg>
         <span class="text">Add Book</span>
     </button>
+    <div class="notify-holder column">
+    </div>
 </body>
 
 </html>
