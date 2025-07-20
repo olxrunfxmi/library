@@ -610,6 +610,7 @@
 		border-radius: var(--radius-m);
 		background: var(--library--action--background);
 		color: var(--library--action--text-on-bg);
+		overflow: visible;
 
 		&::backdrop {
 			background: none;
@@ -674,6 +675,23 @@
 					align-self: center;
 					margin-block-start: var(--spacing-l);
 				}
+			}
+		}
+
+		.error-bar {
+			background: var(--library--book--red-fill);
+			max-width: 360px;
+			width: 100%;
+			padding-block: 10px;
+			padding-inline: var(--spacing-xl);
+			border-radius: var(--spacing-l);
+			box-shadow: var(--library--shadow--notify);
+			position: absolute;
+			top: 0;
+			transform: translateY(-115%);
+
+			&[data-visible="false"] {
+				display: none;
 			}
 		}
 	}

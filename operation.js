@@ -48,6 +48,7 @@ const bookNoInfoEl = libraryInfoEl.querySelector("#book-no");
 const bookReadInfoEl = libraryInfoEl.querySelector("#book-read");
 const bookPageInfoEl = libraryInfoEl.querySelector("#book-pages");
 const notificationHolderEl = document.querySelector(".notify-holder ");
+const errorBarEl = formDialogEl.querySelector(".error-bar");
 
 // For reseting
 // localStorage.removeItem("library");
@@ -77,29 +78,38 @@ addButtonEl.addEventListener("click", () => {
 closeButtonEl.addEventListener("click", (e) => {
 	formDialogEl.close();
 	e.preventDefault();
+	errorBarEl.dataset.visible = "false";
 });
 
 formDialogEl.addEventListener("click", (e) => {
 	if (e.target === formDialogEl) {
 		formDialogEl.close();
+		errorBarEl.dataset.visible = "false";
 	}
 });
 
 submitButtonEl.addEventListener("click", (e) => {
 	e.preventDefault();
-	const formData = processForm(formEl);
-	const book = Library.generateBookObj(formData);
-	Library.addBookToLibrary(myLibrary, book, formData.read);
-	trackLibraryStorage();
-	formDialogEl.close();
-	trackLibraryBreakdown(
-		Library.getLibraryBreakdown(myLibrary),
-		bookNoInfoEl,
-		bookReadInfoEl,
-		bookPageInfoEl
-	);
-	Library.renderBook(book, generateBookElement, mainEl);
-	notifyClient(notificationHolderEl, createNotification(book.title, "add"));
+	if (validateForm().length === 0) {
+		errorBarEl.dataset.visible = "false";
+		const formData = processForm(formEl);
+		const book = Library.generateBookObj(formData);
+		Library.addBookToLibrary(myLibrary, book, formData.read);
+		trackLibraryStorage();
+		formDialogEl.close();
+		trackLibraryBreakdown(
+			Library.getLibraryBreakdown(myLibrary),
+			bookNoInfoEl,
+			bookReadInfoEl,
+			bookPageInfoEl
+		);
+		Library.renderBook(book, generateBookElement, mainEl);
+		notifyClient(notificationHolderEl, createNotification(book.title, "add"));
+	} else {
+		console.log(validateForm());
+		errorBarEl.dataset.visible = "true";
+		errorBarEl.textContent = validateForm();
+	}
 });
 
 function processForm(formEl) {
@@ -288,4 +298,36 @@ function notifyClient(holderEl, notificationEl) {
 	setTimeout(() => {
 		notificationEl.remove();
 	}, 3000);
+}
+
+function validateForm() {
+	const error = [];
+
+	const bookValue = formEl.elements["book_name"].value;
+	const authorValue = formEl.elements["book_author"].value;
+	const yearPublishedValue = formEl.elements["book_year"].value;
+	const pagesValue = formEl.elements["book_pages"].value;
+	const editionValue = formEl.elements["book_edition"].value;
+
+	if (bookValue === "") {
+		error.push("Book Title");
+	}
+
+	if (authorValue === "") {
+		error.push("Author Name");
+	}
+
+	if (Number(yearPublishedValue) < 1000) {
+		error.push("Year Published");
+	}
+
+	if (Number(pagesValue) < 1) {
+		error.push("Pages");
+	}
+
+	if (error.length !== 0) {
+		return `The ${error.join(", ")} input have issues. Please fix.`;
+	}
+
+	return error;
 }

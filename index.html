@@ -57,6 +57,8 @@
         </div>
     </section>
     <dialog id="formDialog">
+        <div class="error-bar" data-visible="false">
+        </div>
         <form class="form column" id="bookForm" action="">
             <div class="bar">
                 <img src="./assets/thelibrary.svg" alt="">
@@ -77,7 +79,7 @@
             </div>
             <input type="text" placeholder="Name of your book" name="book_name" required>
             <input type="text" placeholder="What's the Book's Author" name="book_author" required>
-            <input type="number" placeholder="Year the Book was published" name="book_year" required>
+            <input type="number" min="1000" placeholder="Year the Book was published" name="book_year" required>
             <input type="number" placeholder="How many pages" name="book_pages" required>
             <input type="text" placeholder="Book's Edition" name="book_edition" required>
             <select name="book_read" id="" required>
