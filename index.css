@@ -554,6 +554,10 @@
 				transform: rotate(-17.39deg);
 			}
 
+			.text {
+				font-size: var(--step--1);
+			}
+
 			display: none;
 		}
 

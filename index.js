@@ -1,9 +1,12 @@
+const colorOption = ["orange", "blue", "purple", "pink", "red", "green"];
+
 function Book() {
 	if (!new.target) {
 		throw Error("Can generate Book object unless it's an instance");
 	}
 
 	this.id = crypto.randomUUID();
+	this.color = colorOption[Math.floor(Math.random() * 6)];
 }
 
 Book.prototype = {
@@ -17,19 +20,8 @@ Book.prototype = {
 	setRead(read) {
 		this.read = read;
 	},
-	getDetails() {
-		return {
-			title: this.title,
-			author: this.author,
-			year: this.year,
-			pages: this.pages,
-			edition: this.edition,
-			read: this.read ? this.read : false,
-		};
-	},
 	toJSON() {
 		return {
-			id: this.id,
 			id: this.id,
 			title: this.title,
 			author: this.author,
@@ -37,6 +29,7 @@ Book.prototype = {
 			pages: this.pages,
 			edition: this.edition,
 			read: this.read || false,
+			color: this.color,
 		};
 	},
 };
@@ -50,6 +43,7 @@ Book.fromJSON = function (data) {
 	book.pages = data.pages;
 	book.edition = data.edition;
 	book.read = data.read;
+	book.color = data.color;
 	return book;
 };
 
@@ -62,7 +56,13 @@ function addBookToLibrary(library, book, readValue) {
 	saveLibraryToStorage(library);
 }
 
-function renderLibrary(library, holderEl) {}
+function renderLibrary(library, generateFunc, holderEl) {
+	library.forEach((book) => {
+		const bookData = book.toJSON();
+		const bookEl = generateFunc(bookData);
+		holderEl.appendChild(bookEl);
+	});
+}
 
 function generateBookObj(formData) {
 	const book = new Book();
