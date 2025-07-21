@@ -92,11 +92,11 @@ submitButtonEl.addEventListener("click", (e) => {
 	e.preventDefault();
 	if (validateForm().length === 0) {
 		errorBarEl.dataset.visible = "false";
+		formDialogEl.close();
 		const formData = processForm(formEl);
 		const book = Library.generateBookObj(formData);
 		Library.addBookToLibrary(myLibrary, book, formData.read);
 		trackLibraryStorage();
-		formDialogEl.close();
 		trackLibraryBreakdown(
 			Library.getLibraryBreakdown(myLibrary),
 			bookNoInfoEl,
@@ -105,8 +105,8 @@ submitButtonEl.addEventListener("click", (e) => {
 		);
 		Library.renderBook(book, generateBookElement, mainEl);
 		notifyClient(notificationHolderEl, createNotification(book.title, "add"));
+		resetForm();
 	} else {
-		console.log(validateForm());
 		errorBarEl.dataset.visible = "true";
 		errorBarEl.textContent = validateForm();
 	}
@@ -207,6 +207,19 @@ function generateBookElement(bookData) {
 	sectionEl.append(editionParaEl, titleEl, pageEl, barEl, readSVGEl, deleteEl);
 	sectionEl.dataset.color = bookData.color;
 	sectionEl.dataset.id = bookData.id;
+
+	sectionEl.addEventListener("dblclick", (e) => {
+		Library.changeReadState(myLibrary, e.currentTarget.dataset.id);
+		e.currentTarget.dataset.read =
+			e.currentTarget.dataset.read === "true" ? "false" : "true";
+		Library.saveLibraryToStorage(myLibrary);
+		trackLibraryBreakdown(
+			Library.getLibraryBreakdown(myLibrary),
+			bookNoInfoEl,
+			bookReadInfoEl,
+			bookPageInfoEl
+		);
+	});
 
 	return sectionEl;
 }
@@ -330,4 +343,13 @@ function validateForm() {
 	}
 
 	return error;
+}
+
+function resetForm() {
+	formEl.elements["book_name"].value = "";
+	formEl.elements["book_author"].value = "";
+	formEl.elements["book_year"].value = "";
+	formEl.elements["book_pages"].value = "";
+	formEl.elements["book_edition"].value = "";
+	formEl.elements["book_read"].value = "";
 }

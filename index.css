@@ -150,6 +150,7 @@
 			rgba(164, 155, 155, 0.25);
 		--library--shadow--notify: 0px 12px 15.399999618530273px
 			rgba(164, 155, 155, 0.25);
+		--library--shadow--book-hover: 18px 36px 30px rgba(120, 116, 116, 0.25);
 
 		/* White and Black */
 		--library--white--main: rgba(255, 255, 255, 1);
@@ -437,6 +438,7 @@
 		box-shadow: var(--library--shadow--book);
 		max-width: 345px;
 		position: relative;
+		transition: box-shadow 0.4s ease;
 
 		h2,
 		p {
@@ -463,6 +465,12 @@
 			font-weight: var(--fw-bold);
 			margin-block: var(--spacing-vl);
 			padding-block-end: var(--spacing-l);
+		}
+
+		.author {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
 		}
 
 		.title {
@@ -565,6 +573,8 @@
 		}
 
 		&:hover {
+			box-shadow: var(--library--shadow--book-hover);
+
 			.delete {
 				display: flex;
 			}

@@ -20,6 +20,9 @@ Book.prototype = {
 	setRead(read) {
 		this.read = read;
 	},
+	changeReadState() {
+		this.read = this.read ? false : true;
+	},
 	toJSON() {
 		return {
 			id: this.id,
@@ -86,10 +89,18 @@ function removeBookFromLibrary(library, id) {
 	});
 }
 
+function changeReadState(library, id) {
+	const [book] = library.filter((book) => {
+		return book.id === id;
+	});
+	const bookIndex = library.indexOf(book);
+	book.changeReadState();
+	library[bookIndex] = book;
+}
+
 function saveLibraryToStorage(library) {
 	const serializedLibrary = library.map((book) => book.toJSON());
 	localStorage.setItem("library", JSON.stringify(serializedLibrary));
-	console.log("Saved");
 }
 
 function loadLibraryFromStorage() {
@@ -129,4 +140,5 @@ export {
 	loadLibraryFromStorage,
 	saveLibraryToStorage,
 	getLibraryBreakdown,
+	changeReadState,
 };
