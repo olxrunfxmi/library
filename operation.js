@@ -198,6 +198,10 @@ function generateBookElement(bookData) {
 			bookPageInfoEl
 		);
 		trackLibraryStorage();
+		notifyClient(
+			notificationHolderEl,
+			createNotification(bookData.title, "delete")
+		);
 	});
 
 	const deleteSVGEl = createComplexSVG(deleteSVGProp);
@@ -218,6 +222,10 @@ function generateBookElement(bookData) {
 			bookNoInfoEl,
 			bookReadInfoEl,
 			bookPageInfoEl
+		);
+		notifyClient(
+			notificationHolderEl,
+			createNotification(bookData.title, "read")
 		);
 	});
 
